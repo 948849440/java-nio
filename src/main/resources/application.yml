@@ -1,0 +1,19 @@
+#tcp监听的端口
+tcp:
+  port-http: 10086
+  port-webSocketServer: 10010
+  port-demoOneServer: 10011
+# bossGroup的线程数
+boss:
+  thread:
+    count-http: 2
+    count-webSocketServer: 2
+# worker的线程数
+worker:
+  thread:
+    count-http: 2
+    count-webSocketServer: 2
+#是否使用长连接
+so:
+  keepalive:  true
+  backlog: 100
