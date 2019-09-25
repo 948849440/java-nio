@@ -22,7 +22,7 @@ public class ClientManager {
     }
 
     public void startClient(){
-        if(channal != null){
+        if(channal != null && channal.isActive()){
             return;
         }
         clientApplicationDemoOne.startServer();

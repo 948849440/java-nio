@@ -39,12 +39,18 @@ public class WebSocketClientApplication {
     @Value("${tcp.port-webSocketServer}")
     private int tcpPort;
 
+    @Value("${switch.webSocket-client}")
+    private boolean startSwitch;
+
     private EventLoopGroup workGroup;
 
     private ChannelFuture channelFuture;
 
-    //@PostConstruct
+    @PostConstruct
     private void startServer() {
+        if(!startSwitch){
+            return;
+        }
         try {
             Bootstrap bootstrap = new Bootstrap();
             workGroup = new NioEventLoopGroup(workerCount);

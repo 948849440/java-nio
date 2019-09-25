@@ -1,6 +1,7 @@
 package com.summer.study.netty.demoOne.client;
 
 import com.summer.study.netty.base.manager.ClientManager;
+import com.summer.study.netty.demoOne.client.handler.GameDemoMessageEncoder;
 import com.summer.study.netty.demoOne.client.handler.MessageEncoder;
 import com.summer.study.netty.demoOne.client.handler.SerializeMessageEncoder;
 import io.netty.bootstrap.Bootstrap;
@@ -27,6 +28,9 @@ public class ClientApplicationDemoOne {
     @Value("${tcp.port-demoOneServer}")
     private int tcpPort;
 
+    @Value("${switch.demoOne-server}")
+    private boolean startSwitch;
+
     private EventLoopGroup workGroup;
 
     private ChannelFuture channelFuture;
@@ -44,11 +48,15 @@ public class ClientApplicationDemoOne {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             //pipeline.addLast(new MessageEncoder());
-                            pipeline.addLast(new SerializeMessageEncoder());
+                            pipeline.addLast(new GameDemoMessageEncoder());
+                            //pipeline.addLast(new SerializeMessageEncoder());
                         }
                     });
             channelFuture = bootstrap.connect("127.0.0.1", tcpPort).sync();
             clientManager.initChannal(channelFuture.channel());
+            channelFuture.channel().closeFuture().addListener( future -> {
+                System.out.println("client auto disconnect");
+            });
             System.out.println("client start !!");
         } catch (InterruptedException e) {
             e.printStackTrace();

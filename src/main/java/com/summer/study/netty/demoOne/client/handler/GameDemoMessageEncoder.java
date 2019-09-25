@@ -4,14 +4,15 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
-public class MessageEncoder extends MessageToByteEncoder {
+public class GameDemoMessageEncoder extends MessageToByteEncoder {
+
+    private byte[] magicArr = {1, 0, 2, 4};
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) throws Exception {
         System.out.println("demo one MessageEncoder!!");
-        ByteBuf byteBuf = ctx.alloc().buffer();
-        byteBuf.writeInt(1);
-        byteBuf.writeInt(2);
-        out.writeBytes(byteBuf);
+        out.writeBytes(magicArr);
+        System.out.println(msg);
+        out.writeInt((int) msg);
     }
 }

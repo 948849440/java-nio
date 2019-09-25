@@ -30,6 +30,9 @@ public class WebSocketServerApplication {
     @Value("${tcp.port-webSocketServer}")
     private int tcpPort;
 
+    @Value("${switch.webSocket-server}")
+    private boolean startSwitch;
+
     private EventLoopGroup bossGroup;
 
     private EventLoopGroup workGroup;
@@ -38,6 +41,9 @@ public class WebSocketServerApplication {
 
     @PostConstruct
     private void startServer(){
+        if(!startSwitch){
+            return;
+        }
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bossGroup = new NioEventLoopGroup(bossCount);

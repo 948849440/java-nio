@@ -11,8 +11,9 @@ public class MessageDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         System.out.println("demo one MessageDecoder!!");
-        int inInt = in.readInt();
-        out.add(inInt);
+        System.out.println(in.readInt());
+        System.out.println(in.readInt());
+        out.add("haha");
 
     }
 }

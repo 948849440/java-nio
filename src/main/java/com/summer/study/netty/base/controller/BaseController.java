@@ -20,10 +20,7 @@ public class BaseController {
     @MethodMapper(value = "/test")
     public void test(){
         clientManager.startClient();
-        ReqSayHallo sayHallo = new ReqSayHallo();
-        sayHallo.setId(66);
-        sayHallo.setText("fuck");
-        clientManager.sendMessage(sayHallo);
+        clientManager.sendMessage("123");
     }
 
     @MethodMapper(value = "/smt")
@@ -34,4 +31,11 @@ public class BaseController {
         sayHallo.setText("fuck");
         clientManager.sendMessage(sayHallo);
     }
+
+    @MethodMapper(value = "/tg")
+    public void testGame(){
+        clientManager.startClient();
+        clientManager.sendMessage(1024);
+    }
+
 }

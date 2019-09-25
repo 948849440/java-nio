@@ -1,5 +1,6 @@
 package com.summer.study.netty.demoOne.server;
 
+import com.summer.study.netty.demoOne.server.handler.GameDemoMessageDecoder;
 import com.summer.study.netty.demoOne.server.handler.MessageDecoder;
 import com.summer.study.netty.demoOne.server.handler.SerializeMessageDecoder;
 import com.summer.study.netty.demoOne.server.handler.ServerHandler;
@@ -29,6 +30,9 @@ public class ServerApplicationDemoOne {
     @Value("${tcp.port-demoOneServer}")
     private int tcpPort;
 
+    @Value("${switch.demoOne-server}")
+    private boolean startSwitch;
+
     private EventLoopGroup bossGroup;
 
     private EventLoopGroup workGroup;
@@ -37,6 +41,9 @@ public class ServerApplicationDemoOne {
 
     @PostConstruct
     private void startServer() {
+        if(!startSwitch){
+            return;
+        }
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bossGroup = new NioEventLoopGroup(bossCount);
@@ -54,7 +61,8 @@ public class ServerApplicationDemoOne {
                             //pipeline.addLast("http-codec", new HttpServerCodec());
                             //pipeline.addLast("http-aggregator", new HttpObjectAggregator(65536));
                             //pipeline.addLast(new MessageDecoder());
-                            pipeline.addLast(new SerializeMessageDecoder());
+                            pipeline.addLast(new GameDemoMessageDecoder());
+                            //pipeline.addLast(new SerializeMessageDecoder());
                             pipeline.addLast(new ServerHandler());
                         }
                     });
