@@ -11,6 +11,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("ServerHandler msg:"+msg);
         if("stop".equals(msg)){
+            System.out.println("ServerHandler close");
             ctx.channel().close();
         }
         ReferenceCountUtil.release(msg);

@@ -19,7 +19,7 @@ public class HeartbeatManager {
 
     private Channel clientChannel;
 
-    private AtomicInteger heartBeatErrorTimes;
+    private AtomicInteger heartBeatErrorTimes = new AtomicInteger(0);
 
     private int MAX_ERROR_TIMES;
 
