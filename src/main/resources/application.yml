@@ -1,16 +1,29 @@
+switch:
+  webSocket-server: false
+  webSocket-client: false
+  http-server: true
+  http-client: true
+  demoOne-server: false
+  demoOne-client: false
+  heartBeat-server: true
+  heartBeat-client: true
+
 #tcp监听的端口
 tcp:
   port-http: 10086
   port-webSocketServer: 10010
   port-demoOneServer: 10011
+  port-heartbeatServer: 10012
 # bossGroup的线程数
 boss:
   thread:
+    count-common: 2
     count-http: 2
     count-webSocketServer: 2
 # worker的线程数
 worker:
   thread:
+    count-common: 2
     count-http: 2
     count-webSocketServer: 2
 #是否使用长连接
