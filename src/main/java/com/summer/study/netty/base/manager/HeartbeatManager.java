@@ -76,4 +76,8 @@ public class HeartbeatManager {
         System.out.println("reconnect");
         heartBeatClient.connect();
     }
+
+    public void clientStop(String clientStop) {
+        clientChannel.close();
+    }
 }

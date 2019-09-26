@@ -10,7 +10,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("ServerHandler msg:"+msg);
-        if("stop".equals(msg)){
+        if("serverStop".equals(msg)){
             System.out.println("ServerHandler close");
             ctx.channel().close();
         }
@@ -24,5 +24,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             System.out.println("server IdleStateEvent" + evt);
         }
         super.userEventTriggered(ctx, evt);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("server receive client stop");
     }
 }

@@ -21,9 +21,19 @@ public class HeartBeatController {
         heartbeatManager.writeMessage("happy !!");
     }
 
-    @MethodMapper(value = "/stop")
-    public void stop() {
-        heartbeatManager.writeMessage("stop");
+    @MethodMapper(value = "/serverStop")
+    public void serverStop() {
+        heartbeatManager.writeMessage("serverStop");
+    }
+
+    @MethodMapper(value = "/isActive")
+    public void isActive() {
+        System.out.println("isActive:" + heartbeatManager.isActive());
+    }
+
+    @MethodMapper(value = "/clientStop")
+    public void clientStop() {
+        heartbeatManager.clientStop("clientStop");
     }
 
 }
