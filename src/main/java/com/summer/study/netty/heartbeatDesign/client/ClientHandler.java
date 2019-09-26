@@ -38,4 +38,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             }
         });
     }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("client channelInactive!!");
+    }
 }
