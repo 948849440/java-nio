@@ -57,6 +57,12 @@ public class HeartBeatClient {
     public void connect(){
         try {
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", PORT).sync();
+            channelFuture.channel().closeFuture().addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                    System.out.println("client closeFuture act!!!!!");
+                }
+            });
             heartbeatManager.initClientChannel(channelFuture.channel());
             channelFuture.channel().writeAndFlush("fkkkk !!");
             System.out.println("HeartBeatClient connect !!");
